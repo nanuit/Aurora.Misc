@@ -16,13 +16,14 @@ namespace Aurora.Misc.Application
         {
             const int peHeaderOffset = 60;
             const int linkerTimestampOffset = 8;
-            var b = new byte[2048];
+            var linkerTimestampBytes = new byte[2048];
             System.IO.FileStream s = null;
             using (s = new System.IO.FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
-                    s.Read(b, 0, 2048);
+                    s.Read(linkerTimestampBytes, 0, 2048);
             
-            var dt = new System.DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(System.BitConverter.ToInt32(b, System.BitConverter.ToInt32(b, peHeaderOffset) + linkerTimestampOffset));
-            return dt.AddHours(System.TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
+            var linkerTimeStampUtc = new System.DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(System.BitConverter.ToInt32(linkerTimestampBytes, System.BitConverter.ToInt32(linkerTimestampBytes, peHeaderOffset) + linkerTimestampOffset));
+            
+            return TimeZoneInfo.ConvertTimeFromUtc(linkerTimeStampUtc, TimeZoneInfo.Local);
         }
         /// <summary>
         /// Retrieves the linker timestamp.
@@ -43,10 +44,9 @@ namespace Aurora.Misc.Application
 
             var headerPos = BitConverter.ToInt32(bytes, peHeaderOffset);
             var secondsSince1970 = BitConverter.ToInt32(bytes, headerPos + linkerTimestampOffset);
-            var dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
-            dt = dt.AddSeconds(secondsSince1970);
-            dt = dt.AddHours(System.TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
-            return dt;
+            var netLinkerTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);            
+            netLinkerTimestamp = TimeZoneInfo.ConvertTimeFromUtc(netLinkerTimestamp.AddSeconds(secondsSince1970), TimeZoneInfo.Local); 
+            return netLinkerTimestamp;
         }
         /// <summary>
         /// get the linked timestamp for the assembly

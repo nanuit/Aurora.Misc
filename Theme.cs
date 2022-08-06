@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System;
 using System.Globalization;
-using System.Linq;
-#if TRUE
 using System.Management;
-
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Win32;
 
 namespace Aurora.Misc
 {
@@ -86,4 +80,4 @@ namespace Aurora.Misc
         }
     }
 }
-#endif
+

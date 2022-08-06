@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48;net6.0</TargetFrameworks>    
+    <TargetFrameworks>net48;net5.0;net6.0</TargetFrameworks>    
     <AssemblyName>Aurora.Misc</AssemblyName>
     <RootNamespace>Aurora.Misc</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>1.0.1</VersionPrefix>
+	<VersionPrefix>1.0.3</VersionPrefix>
 	<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	<ImplicitUsings>disable</ImplicitUsings>
@@ -12,7 +12,7 @@
 	<Description>miscelaneous classes</Description>
 	<Copyright>Nanuit(c) 2022</Copyright>
 	<PackageIcon>nuget.png</PackageIcon>
-	<PackageReleaseNotes>Added .net6 support</PackageReleaseNotes>	
+	<PackageReleaseNotes>Added .net5 support</PackageReleaseNotes>	
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
