@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+#if TRUE
 using System.Management;
+
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +36,7 @@ namespace Aurora.Misc
 
         public WindowsTheme WatchTheme()
         {
+
             var currentUser = WindowsIdentity.GetCurrent();
             string query = string.Format(
                 CultureInfo.InvariantCulture,
@@ -44,6 +47,7 @@ namespace Aurora.Misc
 
             try
             {
+
                 var watcher = new ManagementEventWatcher(query);
                 watcher.EventArrived += (sender, args) =>
                                         {
@@ -82,3 +86,4 @@ namespace Aurora.Misc
         }
     }
 }
+#endif
