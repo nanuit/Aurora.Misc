@@ -41,7 +41,6 @@ namespace Aurora.Misc.Application
             {
                 file.Read(bytes, 0, bytes.Length);
             }
-
             var headerPos = BitConverter.ToInt32(bytes, peHeaderOffset);
             var secondsSince1970 = BitConverter.ToInt32(bytes, headerPos + linkerTimestampOffset);
             var netLinkerTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);            
@@ -67,6 +66,16 @@ namespace Aurora.Misc.Application
         public static Version GetVersion(this Assembly assembly)
         {
             return (assembly.GetName().Version);
+        }
+        /// <summary>
+        /// Read the build timestamp from the custom assembly attribute
+        /// </summary>
+        /// <param name="assembly">assembly the attribute is to be read from</param>
+        /// <returns></returns>
+        public static DateTime GetCustomAssemblyLinkDate(this Assembly assembly)
+        {            
+            var attr = assembly.GetCustomAttribute<BuildDateAttribute>();            
+            return attr != null ? attr.UtcBuildTimeStamp : default(DateTime); 
         }
     }
 }

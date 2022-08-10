@@ -1,37 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net48;net5.0;net6.0</TargetFrameworks>    
-    <AssemblyName>Aurora.Misc</AssemblyName>
-    <RootNamespace>Aurora.Misc</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>1.0.3</VersionPrefix>
-	<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-	<ImplicitUsings>disable</ImplicitUsings>
-	<Authors>Nanuit</Authors>
-	<Description>miscelaneous classes</Description>
-	<Copyright>Nanuit(c) 2022</Copyright>
-	<PackageIcon>nuget.png</PackageIcon>
-	<PackageReleaseNotes>Added .net5 support</PackageReleaseNotes>	
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net48;net5.0;net6.0</TargetFrameworks>
+		<AssemblyName>Aurora.Misc</AssemblyName>
+		<RootNamespace>Aurora.Misc</RootNamespace>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Authors>Nanuit</Authors>
+		<Description>miscelaneous classes</Description>
+		<Copyright>Nanuit(c) 2022</Copyright>
+		<PackageIcon>nuget.png</PackageIcon>
+		<PackageReleaseNotes>Added .net5 support</PackageReleaseNotes>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\Common\nuget.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\Common\nuget.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Management" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Management" Version="6.0.0" />
+	</ItemGroup>
 
 </Project>
