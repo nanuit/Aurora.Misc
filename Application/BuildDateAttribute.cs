@@ -10,16 +10,16 @@ namespace Aurora.Misc.Application
     /// <summary>
     /// Custom Assembly Attribute to store the current Build date 
     /// 
-    /// To use this class you have to add the following itemgroup to the project file you want to use the attribute
+    /// To use this class you have to add the following item group to the project file you want to use the attribute
     /// <ItemGroup>
-    ///    <AssemblyAttributeInclude="BuildDateAttribute">
+    ///    <AssemblyAttributeInclude="Aurora.Misc.Application.BuildDateAttribute">
     ///      <_Parameter1>$([System.DateTime]::UtcNow.ToString("u"))</_Parameter1>
     ///   </AssemblyAttribute>
     ///  </ItemGroup>
     /// </summary>
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    internal class BuildDateAttribute : Attribute
+    public class BuildDateAttribute : Attribute
     {
         public BuildDateAttribute(string value)
         {
