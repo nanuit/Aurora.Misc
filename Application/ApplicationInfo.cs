@@ -68,14 +68,23 @@ namespace Aurora.Misc.Application
             return (assembly.GetName().Version);
         }
         /// <summary>
+        /// Read the build timestamp from the custom assembly attribute for Utc
+        /// </summary>
+        /// <param name="assembly">assembly the attribute is to be read from</param>
+        /// <returns></returns>
+        public static DateTime GetCustomAssemblyLinkDateUtc(this Assembly assembly)
+        {            
+            var attr = assembly.GetCustomAttribute<BuildDateAttribute>();            
+            return attr != null ? attr.UtcBuildTimeStamp : default(DateTime); 
+        }
+        /// <summary>
         /// Read the build timestamp from the custom assembly attribute
         /// </summary>
         /// <param name="assembly">assembly the attribute is to be read from</param>
         /// <returns></returns>
-        public static DateTime GetCustomAssemblyLinkDate(this Assembly assembly)
-        {            
-            var attr = assembly.GetCustomAttribute<BuildDateAttribute>();            
-            return attr != null ? attr.UtcBuildTimeStamp : default(DateTime); 
+        public static DateTime GetCustomAssemblyLinkDateLocal(this Assembly assembly)
+        {               
+            return TimeZoneInfo.ConvertTimeFromUtc(GetCustomAssemblyLinkDateUtc(assembly), TimeZoneInfo.Local); 
         }
     }
 }
