@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,10 +39,27 @@ namespace Aurora.Misc.String
             }
             return builder.ToString();
         }
+        /// <summary>
+        /// Create a bytes array from a hexadecimal string
+        /// the hexadecimal bytes can be separated by  '-' or ':'. If no separator every 2 characters will be converted to a byte
+        /// </summary>
+        /// <param name="bytesString">string with a number of hexadecimal bytes</param>
+        /// <returns>resulting byte array</returns>
+        public static byte[] BytesFromHexString(this string bytesString)
+        {
+            bytesString = bytesString.Replace("-", "");
+            bytesString = bytesString.Replace(":", "");
+
+            int numberChars = bytesString.Length;
+            byte[] bytes = new byte[numberChars / 2];
+            for (int i = 0; i < numberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(bytesString.Substring(i, 2), 16);
+            return bytes;
+        }
+
         private static string TranslateByte(byte digit)
         {
             return digit < 32 ? $"\\x{digit:X2}" : $"{(char)digit}";
         }
-
     }
 }
