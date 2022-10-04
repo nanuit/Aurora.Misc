@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Aurora.Misc.Application
 {
+    /// <summary>
+    /// ExtensionMethod to access application Information
+    /// </summary>
     public static class ApplicationInfo
     {
         /// <summary>

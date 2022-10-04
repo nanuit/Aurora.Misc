@@ -4,7 +4,7 @@
 		<AssemblyName>Aurora.Misc</AssemblyName>
 		<RootNamespace>Aurora.Misc</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.8</VersionPrefix>
+		<VersionPrefix>1.0.9</VersionPrefix>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<ImplicitUsings>disable</ImplicitUsings>
@@ -12,8 +12,9 @@
 		<Description>miscelaneous classes</Description>
 		<Copyright>Nanuit(c) 2022</Copyright>
 		<PackageIcon>nuget.png</PackageIcon>
-		<PackageReleaseNotes>BytesFromHexString added</PackageReleaseNotes>
+		<PackageReleaseNotes>Added UintExtensionMethods</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,6 +30,10 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
+
+	<PropertyGroup>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="System.Management" Version="6.0.0" />
