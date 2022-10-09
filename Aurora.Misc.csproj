@@ -12,7 +12,7 @@
 		<Description>miscelaneous classes</Description>
 		<Copyright>Nanuit(c) 2022</Copyright>
 		<PackageIcon>nuget.png</PackageIcon>
-		<PackageReleaseNotes>Added UintExtensionMethods</PackageReleaseNotes>
+		<PackageReleaseNotes>documentation improvement</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
@@ -32,16 +32,12 @@
 		</None>
 	</ItemGroup>
 
-	<PropertyGroup>
-		<LangVersion>8.0</LangVersion>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="System.Management" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Reference Include="System.Xaml" />
+	  <Folder Include="Enumerations\" />
 	</ItemGroup>
 
 </Project>

@@ -6,35 +6,43 @@ using System.Threading.Tasks;
 namespace Aurora.Misc.Updater
 {
     #region Exceptions
+    /// <summary>
+    /// Custom exception for UpdateError Event
+    /// </summary>
     public class UpdateErrorException : Exception
     {
-        public UpdateErrorException() { }
-
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        /// <param name="message">exception message</param>
         public UpdateErrorException(string message)
             : base(message) { }
 
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        /// <param name="message">exception message</param>
+        /// <param name="inner">inner exception</param>
         public UpdateErrorException(string message, Exception inner)
             : base(message, inner) { }
     }
 
+    /// <summary>
+    /// custom Exception for UpdateNotFound Event
+    /// </summary>
     public class UpdateNotFoundException : Exception
     {
+        /// <summary>
+        /// Update not found Exception do not need and additional information
+        /// </summary>
         public UpdateNotFoundException() { }
-
-        public UpdateNotFoundException(string message)
-            : base(message) { }
-
-        public UpdateNotFoundException(string message, Exception inner)
-            : base(message, inner) { }
     }
 
     #endregion
-
-    #region Delegates
-
-   
-    #endregion
-
+    
+    /// <summary>
+    /// class to facilitate an update mechanism based on a web server
+    /// </summary>
     public class Updater
     {
         #region Private Members
@@ -45,6 +53,10 @@ namespace Aurora.Misc.Updater
 
         #region To Life and Die in Starlight
 
+        /// <summary>
+        /// Initialize the calls by setting the download metadata Url
+        /// </summary>
+        /// <param name="updateUrl">url to the download metadata</param>
         public Updater(string updateUrl)
         {
             m_UpdateUrl = updateUrl;
@@ -53,13 +65,32 @@ namespace Aurora.Misc.Updater
         #endregion
 
         #region Events
+        /// <summary>
+        /// delegate handling UpdateFound Events
+        /// </summary>
         public delegate void UpdateFoundEventHandler(Update update);
+        /// <summary>
+        /// delegate handling UpdateError Events
+        /// </summary>
         public delegate void UpdateErrorEventHandler(string errorDescription);
+        /// <summary>
+        /// delegate handling UpdateNotFound Events
+        /// </summary>
         public delegate void NoUpdateFoundEventHandler();
 
-        public event UpdateFoundEventHandler UpdateFound;
-        public event UpdateErrorEventHandler UpdateError;
-        public event NoUpdateFoundEventHandler NoUpdateFound;
+        /// <summary>
+        /// Event fired when an update was found
+        /// </summary>
+        public event UpdateFoundEventHandler? UpdateFound;
+        /// <summary>
+        /// Event fired when the check for an update has failed
+        /// </summary>
+        public event UpdateErrorEventHandler? UpdateError;
+        /// <summary>
+        /// Event fired when there is no update available
+        /// </summary>
+
+        public event NoUpdateFoundEventHandler? NoUpdateFound;
 
         private void OnUpdateFound(Update update)
         {
@@ -88,6 +119,14 @@ namespace Aurora.Misc.Updater
 
         #region Public Methods
 
+        /// <summary>
+        /// Set a proxy to use for connection to the url
+        /// </summary>
+        /// <param name="proxyServer">proxy server to use</param>
+        /// <param name="port">port of the proxy server</param>
+        /// <param name="userName">username if authentication is needed</param>
+        /// <param name="password">password if authentication is needed</param>
+        /// <param name="useSSL">flag to set ssl for proxy connection</param>
         public void SetProxy(string proxyServer, uint port, string userName = "", string password = "", bool useSSL = false)
         {
             m_ProxyString = $@"http{(useSSL ? "s" : "")}://{proxyServer}:{port:d}";
@@ -95,6 +134,10 @@ namespace Aurora.Misc.Updater
             m_ProxyPassword = password;
         }
 
+        /// <summary>
+        /// Initiate the download of downlaod meta information
+        /// </summary>
+        /// <param name="productVersion">version to check for an update</param>
         public void CheckforUpate(Version productVersion)
         {
             Task.Factory.StartNew(() => GetUpdateDataFromUrl(productVersion));
@@ -120,20 +163,18 @@ namespace Aurora.Misc.Updater
                                   {
                                       try
                                       {
-                                          // Create a request for the URL. 		
+                                          	
                                           WebRequest request = WebRequest.Create(m_UpdateUrl);
 
                                           if (!string.IsNullOrEmpty(m_ProxyString))
-                                          {
                                               request.Proxy = CreateProxy();
-                                          }
+                                          
                                           // If required by the server, set the credentials.
                                           request.Credentials = CredentialCache.DefaultCredentials;
-                                          // Get the response.
+                                          
                                           using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
                                           {
-                                              // Display the status.
-                                              // Get the stream containing content returned by the server.
+                                          
                                               using (Stream dataStream = response.GetResponseStream())
                                               {
                                                   if (dataStream != null)
