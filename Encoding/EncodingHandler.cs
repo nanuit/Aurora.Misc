@@ -49,10 +49,10 @@ namespace Aurora.Misc.Encoding
         /// </summary>
         /// <param name="listOfNames"></param>
         /// <returns></returns>
-        public static List<System.Text.Encoding>? GetEncodingsFromNames(List<string> listOfNames)
+        public static List<System.Text.Encoding>? GetEncodingsFromNames(List<string>? listOfNames)
         {
             List<System.Text.Encoding>? retVal = null;
-            if (Encodings != null)
+            if (Encodings != null && listOfNames != null)
                 retVal = Encodings.FindAll((item) => listOfNames.Contains(GetNameFromEncoding(item), StringComparer.CurrentCultureIgnoreCase));
             return retVal;
         }
@@ -61,7 +61,7 @@ namespace Aurora.Misc.Encoding
         /// </summary>
         /// <param name="nameOfEncoding">name of Encoding to get</param>
         /// <returns>Encoding found</returns>
-        public static System.Text.Encoding? GetEncodingFromName(string nameOfEncoding)
+        public static System.Text.Encoding? GetEncodingFromName(string? nameOfEncoding)
         {
             System.Text.Encoding? retVal = null;
             if (Encodings != null)
