@@ -39,7 +39,7 @@ namespace Aurora.Misc.Encoding
         /// </summary>
         /// <param name="encoding">encoding to get the name from</param>
         /// <returns>name of the encoding</returns>
-        public static string GetNameFromEncoding(System.Text.Encoding encoding)
+        public static string GetNameFromEncoding(System.Text.Encoding? encoding)
         {
             return (encoding.HeaderName);
         }
@@ -49,7 +49,7 @@ namespace Aurora.Misc.Encoding
         /// </summary>
         /// <param name="listOfNames"></param>
         /// <returns></returns>
-        public static List<System.Text.Encoding>? GetEncodingsFromNames(List<string>? listOfNames)
+        public static List<System.Text.Encoding?> GetEncodingsFromNames(List<string>? listOfNames)
         {
             List<System.Text.Encoding>? retVal = null;
             if (Encodings != null && listOfNames != null)
